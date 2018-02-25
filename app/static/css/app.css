@@ -1,3 +1,17 @@
 body {
     padding-top: 5rem;
 }
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+    grid-auto-rows: 200px;
+
+}
+
+img {
+    height:200px;
+    width:250px;
+    padding: 5px;
+}
