@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block main %}
+
+<h1 class="page-header">Files</h1>
+
+<div class="wrapper">
+    
+{% for imgs in upload_img %}
+    
+    <img class="i" src="{{url_for('static', filename ='uploads/'+imgs)}}"></img>
+    
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -39,9 +39,9 @@ def upload():
     if request.method == 'POST':
         if uploadForm.validate_on_submit():
             print uploadForm.csrf_token
-            images=uploadForm.images.data
-            filename = secure_filename(images.filename)
-            images.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file=uploadForm.images.data
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         # Get file data and save to your uploads folder
             flash('File Saved', 'success')
             return redirect(url_for('home'))
@@ -49,23 +49,7 @@ def upload():
     return render_template('upload.html',form=uploadForm)
 
 
-def get_uploaded_images():
-    rootdir = os.getcwd()
-    print rootdir
-    img = []
-    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
-        for file in files:
-            img.append(os.path.join(subdir, file).split('/')[-1])
-    return img
-    
-@app.route('/files')
-def files():
-    if not session.get('logged_in'):
-        abort(401)
-        
-    load_images = get_uploaded_images()
-    return render_template('files.html', upload_img = load_images)
-    
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     error = None
